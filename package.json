@@ -1,0 +1,11 @@
+{
+  "name": "jscourse",
+  "version": "1.0.0",
+  "description": "Learn JavaScript",
+  "main": "index.js",
+  "scripts": {
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
