@@ -1,4 +1,14 @@
 {
     "javascript.format.semicolons": "insert",
-    "typescript.format.semicolons": "insert"
+    "typescript.format.semicolons": "insert",
+    "cssvar.extensions": [
+        
+    "#/definitions/common/properties/postDebugTask"
+    ],
+    "remote.extensionKind": {
+
+        "pub.name": [
+            "ui"
+        ]
+    }
 }

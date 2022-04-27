@@ -471,7 +471,7 @@ GOOD LUCK 😀
 const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
-  players: [
+players: [
     [
       'Neuer',
       'Pavard',
