@@ -492,8 +492,6 @@ BONUS: Create an object called 'scorers' which contains the names of the players
 
 GOOD LUCK 😀
 
-*/
-
 const game = {
     team1: 'Bayern Munich',
     team2: 'Borrussia Dortmund',
@@ -535,17 +533,145 @@ const game = {
     },
 };
 
-const scored = [...game.scored];
-
-for (const [index, player] of scored.entries()) {
-    console.log(`Goal ${index + 1}: ${player}.`);
+for (const [goalNumber, player] of game.scored.entries()) {
+    console.log(`Goal ${goalNumber + 1}: ${player}.`);
 }
 
-const odds = (game.odds.team1 + game.odds.team2 + game.odds.x) / 3;
+console.log(`------------`);
 
-console.log(odds);
+let averageOdds = 0;
 
-const odds = {};
+const odds = Object.values(game.odds);
 
 for (const odd of odds) {
+    averageOdds += odd;
 }
+
+averageOdds /= odds.length;
+
+console.log(
+    `Average odd is: ${Math.round(averageOdds * 100) / 100 || `no odds`}.`
+);
+
+console.log(`------------`);
+
+for (const [team, odd] of Object.entries(game.odds)) {
+    const teamStr = team === `x` ? 'draw' : `victory ${game[team]}`;
+    console.log(`Odd of ${teamStr}: ${odd}`);
+}
+
+console.log(`------------`);
+
+const scorers = {};
+
+for (const player of game.scored) {
+    scorers[player] ? scorers[player]++ : (scorers[player] = 1);
+}
+
+console.log(scorers)
+
+const ordersSet = new Set([
+    `Pasta`,
+    `Pizza`,
+    `Pizza`,
+    `Risotto`,
+    `Pasta`,
+    `Pizza`,
+]);
+
+console.log(ordersSet);
+
+console.log(new Set(`Jonas`));
+
+console.log(ordersSet.size);
+
+console.log(ordersSet.has(`Pizza`));
+console.log(ordersSet.has(`Bread`));
+
+ordersSet.add(`Bread`);
+ordersSet.add(`Bread`);
+ordersSet.delete(`Risotto`);
+// ordersSet.clear()
+console.log(ordersSet);
+
+for (const order of ordersSet) console.log(order);
+
+// Example
+const staff = [`Waiter`, `Cook`, `Manager`, `Waiter`, `Cook`];
+
+const staffUnique = [...new Set(staff)]
+console.log(staff);
+console.log(staffUnique);
+
+console.log(new Set([`Waiter`, `Cook`, `Manager`, `Waiter`, `Cook`]).size);
+
+console.log(new Set(`sergejstojanovic`).size)
+
+
+const rest = new Map();
+
+rest.set(`name`, `Classico Italiano`);
+rest.set(1, `Belgrade`);
+console.log(rest.set(2, `Brazilia`));
+
+rest.set(`categories`, [`Pizza`, `Pasta`, `Salad`])
+    .set(`open`, 11)
+    .set(`close`, 23)
+    .set(true, `We are open.`)
+    .set(false, `We are closed.`);
+
+console.log(rest.get(`name`));
+console.log(rest.get(true));
+console.log(rest.get(1));
+
+const time = 8;
+console.log(rest.get(time > rest.get(`open`) && time < rest.get(`close`)));
+
+console.log(rest.has(`categories`));
+rest.delete(2);
+// rest.clear()
+console.log(rest);
+console.log(rest.size);
+
+const arr = [1, 2];
+rest.set(arr, `test`);
+rest.set(document.querySelector(`h1`), `Heading`);
+console.log(rest);
+
+console.log(rest.get(arr));
+
+
+const question = new Map([
+    [`question`, `What is the best programming language in the world`],
+    [1, `C`],
+    [2, `Java`],
+    [3, `JavaScript`],
+    [`Correct`, 3],
+    [true, `Correct`],
+    [false, `Incorrect`],
+]);
+
+console.log(question);
+
+console.log(Object.entries(openingHours));
+
+const hoursMap = new Map(Object.entries(openingHours));
+
+console.log(hoursMap);
+console.log(question.get(`question`));
+for (const [key, value] of question) {
+    typeof key === `number` && console.log(`Answer ${key}: ${value}`);
+}
+
+const answer = 4;
+
+console.log(question.get(question.get(`Correct`) === answer));
+
+// Map => array
+
+console.log([...question]);
+console.log([...question.values()]);
+console.log([...question.keys()]);
+
+*/
+
