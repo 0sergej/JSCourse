@@ -88,8 +88,17 @@ labelDate.textContent = today;
 })();
 
 // Displays all Movements on the main Movements panel
-const displayMovements = function () {
-    currentAccount.movements.forEach(mov => {
+const displayMovements = function (sorted = false) {
+    // Deletes all movements from UI
+    containerMovements.innerHTML = ``;
+
+    // Checks if movements should be sorted
+    const movs = sorted
+        ? currentAccount.movements.slice().sort((a, b) => b - a)
+        : currentAccount.movements;
+
+    // Displays movements
+    movs.forEach(mov => {
         const amount = mov;
         const html = `<div class="movements__row">
         <div class="movements__type movements__type--${
@@ -181,7 +190,7 @@ btnLogin.addEventListener(`click`, e => {
     inputLoginUsername.blur();
     inputLoginPin.blur();
 
-    // Calls all functions for Account that logged in
+    // Calls all functions to display relevant data for Account that's logged in
     displayMovements();
     displayBalance();
     displayIntrest();
@@ -216,39 +225,87 @@ btnTransfer.addEventListener(`click`, e => {
 
 // TODO Request Loan
 
-// Close account
+// // Close account
+// btnClose.addEventListener(`click`, e => {
+//     e.preventDefault();
+
+//     // Gets input
+//     const closeOwner = inputCloseOwner.value;
+//     const closePin = Number(inputClosePin.value);
+
+//     // Check if input is correct
+//     if (
+//         closeOwner === currentAccount.owner &&
+//         closePin === currentAccount.pin
+//     ) {
+//         // Deletes user account
+//         accounts.splice(
+//             accounts.find(acc => {
+//                 acc.owner === closeOwner && acc.pin === closePin;
+//                 return accounts.indexOf(acc);
+//             }),
+//             1
+//         );
+
+//         // Logs out the user
+//         containerApp.style.opacity = 0;
+//     } else {
+//         alert(`Wrong input.`);
+//     }
+
+//     // Clears input fields
+//     inputCloseOwner.value = ``;
+//     inputClosePin.value = ``;
+//     inputCloseOwner.blur();
+//     inputClosePin.blur();
+// });
+
 btnClose.addEventListener(`click`, e => {
     e.preventDefault();
 
-    // Gets input
-    const closeOwner = inputCloseOwner.value;
-    const closePin = Number(inputClosePin.value);
-
-    // Check if input is correct
     if (
-        closeOwner === currentAccount.owner &&
-        closePin === currentAccount.pin
+        inputCloseOwner.value === currentAccount.owner &&
+        Number(inputClosePin.value) === currentAccount.pin
     ) {
-        // Deletes user account
-        accounts.splice(
-            accounts.find(acc => {
-                acc.owner === closeOwner && acc.pin === closePin;
-                return accounts.indexOf(acc);
-            }),
-            1
+        const index = accounts.findIndex(
+            acc => acc.owner === currentAccount.owner
         );
 
-        // Logs out the user
+        accounts.splice(index, 1);
+
         containerApp.style.opacity = 0;
-    } else {
-        alert(`Wrong input.`);
     }
 
-    // Clears input fields
-    inputCloseOwner.value = ``;
-    inputClosePin.value = ``;
-    inputCloseOwner.blur();
-    inputClosePin.blur();
+    inputCloseOwner.value = inputClosePin.value = ``;
+});
+
+btnLoan.addEventListener(`click`, e => {
+    e.preventDefault();
+
+    const amount = Number(inputLoanAmount.value);
+
+    if (
+        amount > 0 &&
+        currentAccount.movements.some(mov => mov >= amount * 0.1)
+    ) {
+        // Add movement
+        currentAccount.movements.push(amount);
+
+        // Update UI
+        displayMovements();
+        displayBalance();
+    }
+
+    inputLoanAmount.value = ``;
+});
+
+let sorted = false;
+
+btnSort.addEventListener(`click`, e => {
+    e.preventDefault();
+
+    displayMovements(!sorted);
+    sorted = !sorted;
 });
 
 /////////////////////////////////////////////////
@@ -529,3 +586,103 @@ GOOD LUCK 😀
 //         console.log(account);
 //     }
 // }
+
+// const firstWithdrawal = movements.find(mov => mov < 0);
+
+// console.log(movements);
+// console.log(firstWithdrawal);
+
+// console.log(accounts);
+
+// const account = accounts.find(acc => acc.owner === `Jessica Davis`);
+// console.log(account);
+
+// let rightAccount;
+// for (const acc of accounts) {
+//     if (acc.owner === `Jessica Davis`) {
+//         rightAccount = acc;
+//         break;
+//     }
+//     console.log(`21`);
+// }
+// console.log(movements);
+// console.log(movements.includes(-130));
+
+// console.log(movements.some(mov => mov === -130));
+
+// const anyDeposits = movements.some(mov => mov > 1400);
+// console.log(anyDeposits);
+
+// console.log(movements.every(mov => mov > 0));
+// console.log(account4.movements.every(mov => mov > 0));
+
+// const deposit = mov => mov > 0;
+
+// console.log(movements.some(deposit));
+// console.log(movements.every(deposit));
+// console.log(movements.filter(deposit));
+
+// const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+// console.log(arr.flat());
+
+// const arrDeep = [
+//     [
+//         [1, 2, 3],
+//         [4, [5, 6]],
+//     ],
+//     7,
+//     8,
+// ];
+
+// console.log(arrDeep.flat(2));
+
+// const accountMovements = accounts.map(acc => acc.movements);
+// console.log(accountMovements);
+// const allMovements = accountMovements.flat();
+// console.log(allMovements);
+// const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance);
+
+// const overalBalance = accounts
+//     .map(acc => acc.movements)
+//     .flat()
+//     .reduce((acc, move) => acc + move, 0);
+// console.log(overalBalance);
+
+// const overalBalance2 = accounts
+//     .flatMap(acc => acc.movements)
+//     .reduce((acc, move) => acc + move, 0);
+// console.log(overalBalance);
+
+// const owners = [`Ser`, `Em`, `Xac`, `Mark`];
+// console.log(owners.sort());
+// console.log(owners);
+
+// console.log(movements);
+// // console.log(movements.sort());
+
+// // Asc
+// // movements.sort((a, b) => {
+// //     if (a > b) {
+// //         return 1;
+// //     }
+// //     if (b > a) {
+// //         return -1;
+// //     }
+// // });
+
+// movements.sort((a, b) => a - b);
+// console.log(movements);
+
+// // Desc
+// // movements.sort((a, b) => {
+// //     if (a > b) {
+// //         return -1;
+// //     }
+// //     if (b > a) {
+// //         return 1;
+// //     }
+// // });
+// movements.sort((a, b) => b - a);
+
+// console.log(movements);
