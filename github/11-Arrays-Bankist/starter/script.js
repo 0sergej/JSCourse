@@ -159,8 +159,6 @@ const transferMoney = function (withdrawl, receiver, deposit) {
     displayMovements();
 };
 
-// TODO Logout Timer
-
 // EVENTS LISTENERS
 
 // Creates an currentAccount variable so it can be used later in funcions
@@ -196,7 +194,6 @@ btnLogin.addEventListener(`click`, e => {
     displayIntrest();
 });
 
-// TODO Sort
 btnSort.addEventListener(`click`, () => {});
 
 // Transfer money
@@ -222,8 +219,6 @@ btnTransfer.addEventListener(`click`, e => {
     inputTransferAmount.blur();
     inputTransferTo.blur();
 });
-
-// TODO Request Loan
 
 // // Close account
 // btnClose.addEventListener(`click`, e => {
@@ -839,49 +834,30 @@ const [sarahDog] = dogs.filter(dog =>
 );
 
 console.log(`-----------III-----------`);
-// TODO
+
 const ownerEatTooMuch = dogs
     .reduce((owner, dog) => {
-        dog.curFood > dog.recommendedFood
-            ? owner.push(dog.owners.map((word, index, arr) => (word += `'s`)))
-            : owner;
+        dog.curFood > dog.recommendedFood ? owner.push(dog.owners) : owner;
         return owner;
     }, [])
     .flat();
 
 const ownerEatTooLittle = dogs
     .reduce((owner, dog) => {
-        dog.curFood < dog.recommendedFood
-            ? owner.push(dog.owners.map((word, index, arr) => (word += `'s`)))
-            : owner;
+        dog.curFood < dog.recommendedFood ? owner.push(dog.owners) : owner;
         return owner;
     }, [])
     .flat();
 
 console.log(`-----------IV-----------`);
-// TODO
-const print = function (f, str) {
-    let runThis = -1;
-    while (runThis < f.length - 1) {
-        runThis++;
-        if (runThis < f.length - 1) {
-            str += `${f[runThis]}, `;
-        } else {
-            str += `${f[runThis]} `;
-        }
-    }
-    return str;
-};
-
-let strMuch = ``;
-let strLittle = ``;
-
-strMuch = print(ownerEatTooMuch, strMuch);
-strLittle = print(ownerEatTooLittle, strLittle);
 
 console.log(
-    `${strMuch}dogs are eating too much.`,
-    `\n${strLittle}dogs are eating too much.`
+    `${ownerEatTooMuch.join(`'s, `)}${
+        ownerEatTooMuch.length > 1 ? `'s dogs are` : `'s dog is`
+    } eating too much.`,
+    `\n${ownerEatTooLittle.join(`'s, `)}${
+        ownerEatTooLittle.length > 1 ? `'s dogs are` : `'s dog is`
+    } eating too little.`
 );
 
 console.log(`-----------V-----------`);
