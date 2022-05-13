@@ -427,3 +427,211 @@ GOOD LUCK 😀
 // tesla.accelerate();
 
 // console.log(tesla);
+
+// const PersonCl = class {
+//     constructor(fullName, birthYear) {
+//         //DATA
+//         this.fullName = fullName;
+//         this.birthYear = birthYear;
+//     }
+
+//     // BEHAVIOR
+
+//     // Instance methods
+//     // Methods will be added to .prototype property
+//     calcAge() {
+//         console.log(2037 - this.birthYear);
+//     }
+
+//     greet() {
+//         console.log(`Hey ${this.fullName}.`);
+//     }
+
+//     get age() {
+//         return 2037 - this.birthYear;
+//     }
+
+//     set fullName(name) {
+//         if (name.includes(` `)) {
+//             this._fullName = name;
+//         } else {
+//             alert(`${name} is not full name!`);
+//         }
+//     }
+
+//     get fullName() {
+//         return this._fullName;
+//     }
+
+//     set sex(sex) {
+//         this._sex = sex;
+//     }
+
+//     get sex() {
+//         return this._sex;
+//     }
+
+//     // Static methods
+//     static hey() {
+//         console.log(`Hey there!`);
+//         console.log(this);
+//     }
+// };
+
+// const StudnetCL = class extends PersonCl {
+//     constructor(fullName, birthYear, course) {
+//         // Always needs to happend first!
+//         super(fullName, birthYear);
+
+//         this.course = course;
+//     }
+
+//     introduce() {
+//         console.log(`My name is ${this.fullName} and I study ${this.course}.`);
+//     }
+
+//     calcAge() {
+//         console.log(
+//             `I am ${2037 - this.birthYear}, but as a student I feel like ${
+//                 2037 - this.birthYear + 10
+//             } Xd.`
+//         );
+//     }
+// };
+
+// // const martha = new StudnetCL(`Martha Jonas`, 2000)
+// const martha = new StudnetCL(`Martha Jonas`, 2012, `Computer science`);
+// martha.introduce();
+// martha.calcAge();
+
+// const PersonProto = {
+//     calcAge() {
+//         console.log(2037 - this.birthYear);
+//     },
+
+//     init(firstName, birthYear) {
+//         this.firstName = firstName;
+//         this.birthYear = birthYear;
+//     },
+// };
+
+// const steven = Object.create(PersonProto);
+
+// const StudnetProto = Object.create(PersonProto);
+// StudnetProto.init = function (firstName, birthName, course) {
+//     PersonProto.init.call(this, firstName, birthName);
+//     this.course = course;
+// };
+
+// StudnetProto.introduce = function () {
+//     console.log(`My name is ${this.firstName} and I study ${this.course}.`);
+// };
+
+// const jay = Object.create(StudnetProto);
+// jay.init(`Jay`, 2010, `Computer science`);
+// jay.introduce();
+// jay.calcAge()
+
+// 1) Public fields
+// 2) Private fields
+
+// 3) Public methods
+// 4) Private methods
+// (there are also the static version)
+
+// const Account = class {
+//     // 1) Public field (instances)
+//     locale = navigator.language;
+
+//     // 2) Private fields
+//     #movements = [];
+//     #pin;
+
+//     constructor(owner, currency, pin) {
+//         this.owner = owner;
+//         this.currency = currency;
+//         // Protected property
+//         this.#pin = pin;
+//         // this._movements = [];
+//         // this.locale = navigator.language;
+
+//         console.log(`Thanks for opening an account, ${owner}`);
+//     }
+
+//     // 3) Public methods
+
+//     // Public API (application programming intreface)
+//     getMovements() {
+//         return this.#movements;
+//     }
+
+//     deposit(val) {
+//         this.#movements.push(val);
+//         return this;
+//     }
+
+//     withdraw(val) {
+//         this.deposit(-val);
+//         return this;
+//     }
+
+//     _approveLoan(val) {
+//         return true;
+//     }
+
+//     requestLoan(val) {
+//         if (this._approveLoan()) {
+//             this.deposit(val);
+//             console.log(`Loan approved`);
+//             return this;
+//         }
+//     }
+
+//     static helper() {
+//         console.log(`Helper`);
+//     }
+
+//     // 4) Private methods
+
+//     // #approveLoan(val) {
+//     //     return true;
+//     // }
+// };
+
+// const acc1 = new Account(`Sergej`, `EUR`, 1111);
+// console.log(acc1);
+
+// // acc1._movements.push(250);
+// // acc1._movements.push(-140);
+
+// acc1.deposit(250);
+// acc1.withdraw(140);
+// acc1.requestLoan(1000);
+
+// console.log(acc1.getMovements());
+// console.log(acc1);
+// Account.helper();
+
+// // console.log(acc1.#movements);
+// // console.log(acc1.#pin);
+// // console.log(acc1.#approveLoad(199));
+
+// // Chaining
+
+// acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+
+// console.log(acc1.getMovements());
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+1. Re-create challenge #3, but this time using ES6 classes: create an 'EVCl' child class of the 'CarCl' class
+2. Make the 'charge' property private;
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update the 'brake' method in the 'CarCl' class. They experiment with chining!
+
+DATA CAR 1: 'Rivian' going at 120 km/h, with a charge of 23%
+
+GOOD LUCK 😀
+*/
+
