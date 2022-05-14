@@ -628,10 +628,97 @@ GOOD LUCK 😀
 /* 
 1. Re-create challenge #3, but this time using ES6 classes: create an 'EVCl' child class of the 'CarCl' class
 2. Make the 'charge' property private;
-3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update the 'brake' method in the 'CarCl' class. They experiment with chining!
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update the 'brake' method in the 'CarCl' class. Then experiment with chining!
 
 DATA CAR 1: 'Rivian' going at 120 km/h, with a charge of 23%
 
 GOOD LUCK 😀
 */
 
+const CarCl = class {
+    make;
+    speed;
+
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+
+    accelerate() {
+        this.speed += 10;
+
+        console.log(this.speed);
+    }
+    break() {
+        this.speed -= 5;
+
+        console.log(this.speed);
+
+        return this;
+    }
+};
+
+const EVCl = class extends CarCl {
+    #charge;
+
+    constructor(make, speed, charge) {
+        super(make, speed);
+        this.#charge = charge;
+    }
+
+    chargeBattery(chargeTo) {
+        this.#charge = chargeTo;
+
+        console.log(this.#charge);
+
+        return this;
+    }
+
+    accelerate() {
+        this.speed += 20;
+        this.#charge--;
+
+        console.log(
+            `${this.make} going at ${this.speed} km/h, with a charge of ${
+                this.#charge
+            }%.`
+        );
+
+        return this;
+    }
+};
+
+const rivian = new EVCl(`Rivian`, 120, 23);
+
+console.log(rivian);
+rivian.accelerate();
+rivian.chargeBattery(59);
+console.log(rivian);
+rivian.break();
+rivian.break();
+rivian.chargeBattery(99);
+console.log(rivian);
+rivian.break();
+rivian.accelerate();
+
+console.log(rivian);
+
+rivian
+    .break()
+    .break()
+    .break()
+    .break()
+    .break()
+    .break()
+    .break()
+    .break()
+    .break()
+    .break()
+    .break()
+    .break()
+    .break()
+    .break()
+    .break()
+    .chargeBattery(80)
+    .accelerate();
+console.log(rivian);
