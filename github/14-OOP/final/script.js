@@ -468,7 +468,7 @@ StudentProto.init = function (firstName, birthYear, course) {
 };
 
 StudentProto.introduce = function () {
-  // BUG in video:
+  // bug in video:
   // console.log(`My name is ${this.fullName} and I study ${this.course}`);
   
   // FIX:
