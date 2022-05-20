@@ -416,7 +416,7 @@ const whereAmI = async function () {
 
         // await country data
         const res = await fetch(
-            `https://restcountries.com/v3.1/name/${dataGeso.countryName}`
+            `https://restcountries.com/v3.1/name/${dataGeo.countryName}`
         );
 
         if (!res.ok) throw new Error(`Problem getting country.`);
@@ -426,13 +426,36 @@ const whereAmI = async function () {
 
         // Render country
         renderCountry(data);
+
+        return `You are in ${dataGeo.city}, ${dataGeo.countryName}.`;
     } catch (err) {
         console.error(`Error occurred: 
         ${err.message}.`);
+
+        // Reject promise returned from async funcion
+        throw err;
     }
 };
 
-whereAmI();
+console.log(`1: Will get location`);
+// const city = whereAmI();
+// console.log(city);
+
+// whereAmI()
+//     .then(city => console.log(`2. ${city}`))
+//     .catch(err => console.error(`2. ${err.message}`))
+//     .finally(() => console.log(`3: Finished getting location`));
+
+(async () => {
+    try {
+        const city = await whereAmI();
+
+        console.log(`2. ${city}`);
+    } catch (err) {
+        console.error(`2. ${err.message}`);
+    }
+    console.log(`3: Finished getting location`);
+})();
 
 // try {
 //     let y = 1;
