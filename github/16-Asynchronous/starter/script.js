@@ -5,29 +5,29 @@ const countriesContainer = document.querySelector('.countries');
 
 ///////////////////////////////////////
 
-const renderCountry = function (data, className = ``) {
-    const html = `
-        <article class="country ${className}">
-          <img class="country__img" src="${data.flags.png}" />
-          <div class="country__data">
-            <h3 class="country__name">${data.name.common}</h3>
-            <h4 class="country__region">${data.region}</h4>
-            <p class="country__row"><span>👫</span>${(
-                +data.population / 1000000
-            ).toFixed(1)}m people</p>
-            <p class="country__row"><span>🗣️</span>${
-                Object.values(data.languages)[0]
-            }</p>
-            <p class="country__row"><span>💰</span>${
-                Object.values(data.currencies)[0].name
-            }</p>
-          </div>
-        </article>
-        `;
+// const renderCountry = function (data, className = ``) {
+//     const html = `
+//         <article class="country ${className}">
+//           <img class="country__img" src="${data.flags.png}" />
+//           <div class="country__data">
+//             <h3 class="country__name">${data.name.common}</h3>
+//             <h4 class="country__region">${data.region}</h4>
+//             <p class="country__row"><span>👫</span>${(
+//                 +data.population / 1000000
+//             ).toFixed(1)}m people</p>
+//             <p class="country__row"><span>🗣️</span>${
+//                 Object.values(data.languages)[0]
+//             }</p>
+//             <p class="country__row"><span>💰</span>${
+//                 Object.values(data.currencies)[0].name
+//             }</p>
+//           </div>
+//         </article>
+//         `;
 
-    countriesContainer.insertAdjacentHTML(`beforeend`, html);
-    countriesContainer.style.opacity = 1;
-};
+//     countriesContainer.insertAdjacentHTML(`beforeend`, html);
+//     countriesContainer.style.opacity = 1;
+// };
 
 // const renderError = function (msg) {
 //     countriesContainer.insertAdjacentText(`beforeend`, msg);
@@ -390,72 +390,72 @@ GOOD LUCK 😀
 //     })
 //     .catch(err => console.error(`Error occurred: ${err.message}`));
 
-const getPosition = function () {
-    return new Promise(function (resolve, reject) {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
-};
+// const getPosition = function () {
+//     return new Promise(function (resolve, reject) {
+//         navigator.geolocation.getCurrentPosition(resolve, reject);
+//     });
+// };
 
 // fetch(`https://restcountries.com/v3.1/name/${country}`).then(res => console.log(res));
 
-const whereAmI = async function () {
-    try {
-        // Get coordinates
-        const pos = await getPosition();
-        const {latitude: lat, longitude: lng} = pos.coords;
+// const whereAmI = async function () {
+//     try {
+//         // Get coordinates
+//         const pos = await getPosition();
+//         const {latitude: lat, longitude: lng} = pos.coords;
 
-        // await location
-        const resGeo = await fetch(
-            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`
-        );
+//         // await location
+//         const resGeo = await fetch(
+//             `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`
+//         );
 
-        if (!resGeo.ok) throw new Error(`Problem getting location data.`);
+//         if (!resGeo.ok) throw new Error(`Problem getting location data.`);
 
-        // await data from response (json)
-        const dataGeo = await resGeo.json();
+//         // await data from response (json)
+//         const dataGeo = await resGeo.json();
 
-        // await country data
-        const res = await fetch(
-            `https://restcountries.com/v3.1/name/${dataGeo.countryName}`
-        );
+//         // await country data
+//         const res = await fetch(
+//             `https://restcountries.com/v3.1/name/${dataGeo.countryName}`
+//         );
 
-        if (!res.ok) throw new Error(`Problem getting country.`);
+//         if (!res.ok) throw new Error(`Problem getting country.`);
 
-        // Get data from response (json)
-        const [data] = await res.json();
+//         // Get data from response (json)
+//         const [data] = await res.json();
 
-        // Render country
-        renderCountry(data);
+//         // Render country
+//         renderCountry(data);
 
-        return `You are in ${dataGeo.city}, ${dataGeo.countryName}.`;
-    } catch (err) {
-        console.error(`Error occurred: 
-        ${err.message}.`);
+//         return `You are in ${dataGeo.city}, ${dataGeo.countryName}.`;
+//     } catch (err) {
+//         console.error(`Error occurred:
+//         ${err.message}.`);
 
-        // Reject promise returned from async funcion
-        throw err;
-    }
-};
+//         // Reject promise returned from async funcion
+//         throw err;
+//     }
+// };
 
-console.log(`1: Will get location`);
-// const city = whereAmI();
-// console.log(city);
+// console.log(`1: Will get location`);
+// // const city = whereAmI();
+// // console.log(city);
 
-// whereAmI()
-//     .then(city => console.log(`2. ${city}`))
-//     .catch(err => console.error(`2. ${err.message}`))
-//     .finally(() => console.log(`3: Finished getting location`));
+// // whereAmI()
+// //     .then(city => console.log(`2. ${city}`))
+// //     .catch(err => console.error(`2. ${err.message}`))
+// //     .finally(() => console.log(`3: Finished getting location`));
 
-(async () => {
-    try {
-        const city = await whereAmI();
+// (async () => {
+//     try {
+//         const city = await whereAmI();
 
-        console.log(`2. ${city}`);
-    } catch (err) {
-        console.error(`2. ${err.message}`);
-    }
-    console.log(`3: Finished getting location`);
-})();
+//         console.log(`2. ${city}`);
+//     } catch (err) {
+//         console.error(`2. ${err.message}`);
+//     }
+//     console.log(`3: Finished getting location`);
+// })();
 
 // try {
 //     let y = 1;
@@ -464,3 +464,126 @@ console.log(`1: Will get location`);
 // } catch (err) {
 //     alert(err.message);
 // }
+
+// const get3Counties = async function (c1, c2, c3) {
+//     try {
+//         // const [data1] = await getJSON(
+//         //     `https://restcountries.com/v3.1/name/${c1}`
+//         // );
+//         // const [data2] = await getJSON(
+//         //     `https://restcountries.com/v3.1/name/${c2}`
+//         // );
+//         // const [data3] = await getJSON(
+//         //     `https://restcountries.com/v3.1/name/${c3}`
+//         // );
+//         // console.log(data1.capital, data2.capital, data3.capital);
+
+//         const data = await Promise.all([
+//             getJSON(`https://restcountries.com/v3.1/name/${c1}`),
+//             getJSON(`https://restcountries.com/v3.1/name/${c2}`),
+//             getJSON(`https://restcountries.com/v3.1/name/${c3}`),
+//         ]);
+//         console.log(data.flatMap(d => d[0].capital))
+
+//     } catch (err) {
+//         console.error(err);
+//     }
+// };
+
+// get3Counties(`serbia`, `portugal`, `usa`);
+
+// Promise.race
+
+// (async () => {
+//     const res = await Promise.race([
+//         getJSON(`https://restcountries.com/v3.1/name/egypt`),
+//         getJSON(`https://restcountries.com/v3.1/name/usa`),
+//         getJSON(`https://restcountries.com/v3.1/name/mexico`),
+//     ]);
+
+//     // console.log(res[0]);
+// })();
+
+// const timeout = function (sec) {
+//     return new Promise(function (_, reject) {
+//         setTimeout(() => {
+//             reject(new Error(`Request took to long!`));
+//         }, sec * 1000);
+//     });
+// };
+
+// Promise.race([
+//     getJSON(`https://restcountries.com/v3.1/name/tanzania`),
+//     timeout(5),
+// ])
+//     .then(res => console.log(res[0]))
+//     .catch(err => console.error(err));
+
+// // Promise.allSettled
+
+// Promise.allSettled([
+//     Promise.resolve(`Success`),
+//     Promise.reject(`Error`),
+//     Promise.resolve(`Another success`),
+// ]).then(res => console.log(res));
+
+// Promise.all([
+//     Promise.resolve(`Success`),
+//     Promise.reject(`Error`),
+//     Promise.resolve(`Another success`),
+// ]).then(res => console.log(res));
+
+// // Promise.any [ES2021]
+
+// Promise.any([
+//     Promise.resolve(`Success`),
+//     Promise.reject(`Error`),
+//     Promise.resolve(`Another success`),
+// ]).then(res => console.log(res));
+
+///////////////////////////////////////
+// Coding Challenge #3
+
+/* 
+PART 1
+Write an async function 'loadNPause' that recreates Coding Challenge #2, this time using async/await (only the part where the promise is consumed). Compare the two versions, think about the big differences, and see which one you like more.
+Don't forget to test the error handler, and to set the network speed to 'Fast 3G' in the dev tools Network tab.
+
+PART 2
+1. Create an async function 'loadAll' that receives an array of image paths 'imgArr';
+2. Use .map to loop over the array, to load all the images with the 'createImage' function (call the resulting array 'imgs')
+3. Check out the 'imgs' array in the console! Is it like you expected?
+4. Use a promise combinator function to actually get the images from the array 😉
+5. Add the 'parallel' class to all the images (it has some CSS styles).
+
+TEST DATA: ['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']. To test, turn off the 'loadNPause' function.
+
+GOOD LUCK 😀
+*/
+
+// const loadNPause = async function (imgPath1, imgPath2) {
+//     try {
+//         let img = await createImage(imgPath1);
+//         await wait(2);
+//         img.style.display = `none`;
+//         await wait(2);
+//         img = await createImage(imgPath2);
+//         await wait(2);
+//         img.style.display = `none`;
+//     } catch (err) {
+//         console.error(`Error occurred:
+//         ${err.message}`);
+//     }
+// };
+
+// // loadNPause('img/img-1.jpg', 'img/img-2.jpg');
+
+// const loadAll = async function (imgArr) {
+//     const imgs = await Promise.all(imgArr.map(img => createImage(img)));
+
+//     console.log(imgs);
+
+//     imgs.forEach(img => img.classList.add(`parallel`));
+// };
+
+// loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
