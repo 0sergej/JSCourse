@@ -142,13 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"5nqo0":[function(require,module,exports) {
+})({"ipXSR":[function(require,module,exports) {
 "use strict";
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "b3c595598cfc62b9";
+module.bundle.HMR_BUNDLE_ID = "0e987d1985968e5b";
 function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
@@ -525,8 +525,86 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"6rimH":[function(require,module,exports) {
+},{}],"9dcWr":[function(require,module,exports) {
+var budget = [
+    {
+        value: 250,
+        description: 'Sold old TV 📺',
+        user: 'jonas'
+    },
+    {
+        value: -45,
+        description: 'Groceries 🥑',
+        user: 'jonas'
+    },
+    {
+        value: 3500,
+        description: 'Monthly salary 👩‍💻',
+        user: 'jonas'
+    },
+    {
+        value: 300,
+        description: 'Freelancing 👩‍💻',
+        user: 'jonas'
+    },
+    {
+        value: -1100,
+        description: 'New iPhone 📱',
+        user: 'jonas'
+    },
+    {
+        value: -20,
+        description: 'Candy 🍭',
+        user: 'matilda'
+    },
+    {
+        value: -125,
+        description: 'Toys 🚂',
+        user: 'matilda'
+    },
+    {
+        value: -1800,
+        description: 'New Laptop 💻',
+        user: 'jonas'
+    }, 
+];
+var limits = {
+    jonas: 1500,
+    matilda: 100
+};
+var add = function(value, description, user) {
+    if (!user) user = 'jonas';
+    user = user.toLowerCase();
+    var lim;
+    if (limits[user]) lim = limits[user];
+    else lim = 0;
+    if (value <= lim) budget.push({
+        value: -value,
+        description: description,
+        user: user
+    });
+};
+add(10, 'Pizza 🍕');
+add(100, 'Going to movies 🍿', 'Matilda');
+add(200, 'Stuff', 'Jay');
+console.log(budget);
+var check = function() {
+    for (var el of budget){
+        var lim;
+        if (limits[el.user]) lim = limits[el.user];
+        else lim = 0;
+        if (el.value < -lim) el.flag = 'limit';
+    }
+};
+check();
+console.log(budget);
+var bigExpenses = function(limit) {
+    var output = '';
+    for (var el of budget)if (el.value <= -limit) output += el.description.slice(-2) + ' / '; // Emojis are 2 chars
+    output = output.slice(0, -2); // Remove last '/ '
+    console.log(output);
+};
 
-},{}]},["5nqo0","6rimH"], "6rimH", "parcelRequire4ba3")
+},{}]},["ipXSR","9dcWr"], "9dcWr", "parcelRequire4ba3")
 
-//# sourceMappingURL=index.8cfc62b9.js.map
+//# sourceMappingURL=index.85968e5b.js.map
