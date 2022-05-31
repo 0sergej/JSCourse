@@ -2,15 +2,19 @@
     "name": "starter",
     "version": "1.0.0",
     "description": "Recipe application",
-    "main": "index.js",
     "scripts": {
         "dev": "parcel index.html",
-        "build": "parcel build index.html"
+        "build": "parcel build index.html --dist-dir ./dist"
     },
     "keywords": [],
     "author": "Sergej Stojanovic",
     "license": "ISC",
     "devDependencies": {
         "parcel": "^2.6.0"
+    },
+    "dependencies": {
+        "core-js": "^3.22.7",
+        "fracty": "^1.0.11",
+        "regenerator-runtime": "^0.13.9"
     }
 }
